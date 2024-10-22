@@ -13,7 +13,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
@@ -22,7 +21,7 @@ public class Controller implements Initializable {
     private TableColumn<Play, String> player;
 
     @FXML
-    private TableColumn<Play, String> title;
+    private TableColumn<Play, String> full_name;
 
     @FXML
     private TableColumn<Play, Double> pp;
@@ -39,13 +38,12 @@ public class Controller implements Initializable {
 
         try {
             User user = osu.getUser("archeryiskey");
-            ObservableList<Play> plays = FXCollections.observableArrayList(osu.getBest(user, 100));
-            System.out.println(plays.get(1).getTitle());
+            ObservableList<Play> plays = FXCollections.observableArrayList(osu.getBest(user, 1));
             table.setItems(plays);
-        } catch (IOException | InterruptedException  e) {}
+        } catch (IOException | InterruptedException  e) { e.printStackTrace(); }
 
         player.setCellValueFactory(new PropertyValueFactory<>("player"));
-        title.setCellValueFactory(new PropertyValueFactory<>("title"));
+        full_name.setCellValueFactory(new PropertyValueFactory<>("full_name"));
         pp.setCellValueFactory(new PropertyValueFactory<>("pp"));
 
 

@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.archery</groupId>
-    <artifactId>stuff2</artifactId>
+    <artifactId>osugrabber</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>stuff2</name>
+    <name>osugrabber</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

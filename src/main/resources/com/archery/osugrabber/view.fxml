@@ -7,6 +7,6 @@
     <columns>
         <TableColumn id="c1" fx:id="player" prefWidth="87.0" text="player" />
         <TableColumn id="c2" fx:id="pp" prefWidth="105.0" text="pp" />
-        <TableColumn id="c1" fx:id="title" maxWidth="900.0" minWidth="70.0" prefWidth="404.0" text="play" />
+        <TableColumn id="c1" fx:id="full_name" maxWidth="900.0" minWidth="70.0" prefWidth="404.0" text="play" />
     </columns>
 </TableView>
