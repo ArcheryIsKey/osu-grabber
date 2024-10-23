@@ -1,0 +1,12 @@
+.backgroundAnchor {
+    -fx-background-color: linear-gradient(to right top, #facd68, #fc76b3);
+}
+
+.hBox {
+    -fx-effect: dropshadow(three-pass-box, purple, 10, 0, 0, 0);
+    -fx-background-color: linear-gradient(to bottom left, #facd68, #fc76b3);
+}
+
+.tabs {
+    -fx-background-color: linear-gradient(to bottom right, #facd68, #fc76b3);
+}

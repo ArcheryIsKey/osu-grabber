@@ -1,15 +1,15 @@
 package com.archery.osugrabber.controller;
 
+import com.archery.osugrabber.enums.GameMode;
 import com.archery.osugrabber.osu.Osu;
-import com.archery.osugrabber.osu.Play;
-import com.archery.osugrabber.osu.User;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.TabPane;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -17,35 +17,78 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
 
-    @FXML
-    private TableColumn<Play, String> player;
+    private double x = 0,y = 0;
 
     @FXML
-    private TableColumn<Play, String> full_name;
-
+    private TextField apiKey;
     @FXML
-    private TableColumn<Play, Double> pp;
-
+    private TextField username;
     @FXML
-    private TableView<Play> table;
+    private HBox h_box;
+    @FXML
+    private TabPane tabPane;
+    @FXML
+    private AnchorPane backgroundAnchor;
+    @FXML
+    private Stage stage;
 
-    ObservableList<Play> plays = FXCollections.observableArrayList();
+    private String osuUsername;
 
-    Osu osu = new Osu("");
+    private Osu osu;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        try {
-            User user = osu.getUser("archeryiskey");
-            ObservableList<Play> plays = FXCollections.observableArrayList(osu.getBest(user, 1));
-            table.setItems(plays);
-        } catch (IOException | InterruptedException  e) { e.printStackTrace(); }
+        /*
+        * TODO: Find a better way to do this.
+        */
 
-        player.setCellValueFactory(new PropertyValueFactory<>("player"));
-        full_name.setCellValueFactory(new PropertyValueFactory<>("full_name"));
-        pp.setCellValueFactory(new PropertyValueFactory<>("pp"));
+        TextField newTextField = username;
+        h_box.getChildren().remove(username); // Scuffed
 
+        TabPane newTabPane = tabPane;
+        h_box.getChildren().remove(tabPane); // Scuffed
 
+        backgroundAnchor.setOnMousePressed(mouseEvent -> {
+            x = mouseEvent.getSceneX();
+            y = mouseEvent.getSceneY();
+        });
+
+        backgroundAnchor.setOnMouseDragged(mouseEvent -> {
+            stage.setX(mouseEvent.getScreenX() - x);
+            stage.setY(mouseEvent.getScreenY() - y);
+        });
+
+        apiKey.setOnKeyPressed(keyEvent -> {
+            if(keyEvent.getCode() == KeyCode.ENTER) {
+                osu = new Osu(apiKey.getText());
+                if(!osu.isValidKey) return;
+                h_box.getChildren().remove(apiKey);
+                h_box.getChildren().add(username);
+                apiKey.setEditable(false);
+            }
+        });
+
+        username.setOnKeyPressed(keyEvent -> {
+            if(keyEvent.getCode() == KeyCode.ENTER) {
+                try {
+                    osu.getBest(osu.getUser(username.getText()), 5, GameMode.MANIA).forEach(play -> System.out.println(play.getFull_name() + " | " + play.getPp() + "\n"));
+                } catch (IOException | InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    public String getUsername() {
+        return osuUsername;
+    }
+
+    public void setUsername(String username) {
+        this.osuUsername = username;
     }
 }

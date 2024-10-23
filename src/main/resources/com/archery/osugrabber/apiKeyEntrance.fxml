@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="backgroundAnchor" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="backgroundAnchor" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.archery.osugrabber.controller.Controller">
+   <children>
+      <HBox id="hBox" fx:id="h_box" alignment="CENTER" layoutX="80.0" layoutY="26.0" prefHeight="314.0" prefWidth="488.0" styleClass="hBox" stylesheets="@style.css" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
+         <children>
+            <TabPane fx:id="tabPane" focusTraversable="false" prefHeight="325.0" prefWidth="1090.0" styleClass="tabs" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab fx:id="osu_standard" text="osu!standard">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  </content>
+                </Tab>
+                <Tab fx:id="osu_mania" text="osu!mania">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  </content>
+                </Tab>
+                  <Tab fx:id="osu_taiko" text="osu!taiko">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    </content>
+                  </Tab>
+                  <Tab fx:id="osu_catch" text="osu!catch">
+                      <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                      </content>
+                  </Tab>
+              </tabs>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </TabPane>
+             <TextField fx:id="username" alignment="CENTER" focusTraversable="false" opacity="0.9" prefHeight="30.0" prefWidth="440.0" promptText="osu! username" styleClass="apiKey" stylesheets="@style.css" HBox.hgrow="ALWAYS">
+                 <font>
+                     <Font name="JetBrains Mono Italic" size="14.0" />
+                 </font>
+                 <effect>
+                     <InnerShadow height="80.35" radius="40.224999999999994" width="82.55">
+                         <input>
+                             <ColorAdjust brightness="0.12" contrast="-0.01" hue="0.73" />
+                         </input>
+                         <color>
+                             <Color red="0.6842105388641357" green="0.44030213356018066" blue="0.44030213356018066" />
+                         </color>
+                     </InnerShadow>
+                 </effect>
+                 <HBox.margin>
+                     <Insets bottom="10.0" left="10.0" right="10.0" />
+                 </HBox.margin>
+             </TextField>
+             <TextField fx:id="apiKey" alignment="CENTER" focusTraversable="false" opacity="0.9" prefHeight="30.0" prefWidth="440.0" promptText="apiKey" styleClass="apiKey" stylesheets="@style.css" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font name="JetBrains Mono Italic" size="14.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="80.35" radius="40.224999999999994" width="82.55">
+                     <input>
+                        <ColorAdjust brightness="0.12" contrast="-0.01" hue="0.73" />
+                     </input>
+                     <color>
+                        <Color red="0.6842105388641357" green="0.44030213356018066" blue="0.44030213356018066" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" />
+               </HBox.margin>
+            </TextField>
+         </children>
+         <effect>
+            <Lighting bumpInput="$null">
+               <light>
+                  <Light.Distant />
+               </light>
+            </Lighting>
+         </effect></HBox>
+   </children>
+   <effect>
+      <Lighting bumpInput="$null">
+         <light>
+            <Light.Distant />
+         </light>
+      </Lighting>
+   </effect>
+</AnchorPane>
