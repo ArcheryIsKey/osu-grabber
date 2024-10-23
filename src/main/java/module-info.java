@@ -4,6 +4,7 @@ module com.archery.osugrabber {
     requires java.net.http;
     requires com.google.gson;
     requires org.jetbrains.annotations;
+    requires java.desktop;
 
     opens com.archery.osugrabber to javafx.fxml;
     exports com.archery.osugrabber;
