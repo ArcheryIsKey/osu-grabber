@@ -1,6 +1,7 @@
 package com.archery.osugrabber.osu;
 
 import com.archery.osugrabber.enums.GameMode;
+import com.archery.osugrabber.enums.Mods;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -12,6 +13,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Osu {
@@ -97,9 +99,10 @@ public class Osu {
         JsonArray bestArray = bestJson.getAsJsonArray();
         int beatmapID = bestArray.get(index - 1).getAsJsonObject().get("beatmap_id").getAsInt();
         double pp = bestArray.get(index - 1).getAsJsonObject().get("pp").getAsDouble();
+        int enabledMods = bestArray.get(index - 1).getAsJsonObject().get("enabled_mods").getAsInt();
         Beatmap beatmap = getBeatmap(beatmapID);
 
-        return new Play(user.getUsername(), beatmap.getArtist(), beatmap.getTitle(), beatmap.getVersion(), pp);
+        return new Play(user.getUsername(), beatmap.getArtist(), beatmap.getTitle(), beatmap.getVersion(), Mods.fromListToMods(Mods.toShortened(enabledMods)), pp);
     }
 
     public Beatmap getBeatmap(int beatmapID) throws IOException, InterruptedException {
@@ -125,8 +128,9 @@ public class Osu {
             try {
                 int beatmapID = play.getAsJsonObject().get("beatmap_id").getAsInt();
                 double pp = play.getAsJsonObject().get("pp").getAsDouble();
+                int enabledMods = play.getAsJsonObject().get("enabled_mods").getAsInt();
                 Beatmap beatmap = getBeatmap(beatmapID);
-                plays.add(new Play(user.getUsername(), beatmap.getArtist(), beatmap.getTitle(), beatmap.getVersion(), pp));
+                plays.add(new Play(user.getUsername(), beatmap.getArtist(), beatmap.getTitle(), beatmap.getVersion(), Mods.fromListToMods(Mods.toShortened(enabledMods)), pp));
             } catch (IOException | InterruptedException e) {}
         });
         return plays;
